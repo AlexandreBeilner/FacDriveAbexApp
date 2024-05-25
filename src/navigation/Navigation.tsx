@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home} from '../screens/Home';
 import {NavigationContainer} from '@react-navigation/native';
-import {FirstScreen, SecundScreen, ThirdScreen} from '../screens/SignUp';
+import {FirstScreen, SecundScreen, ThirdScreen, FourthScreen} from '../screens/SignUp';
 import {Presentation} from '../screens/Presentation';
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +28,7 @@ const StackNavigation = () => {
       <Stack.Screen name={'FirstScreen'} component={FirstScreen} />
       <Stack.Screen name={'SecundScreen'} component={SecundScreen} />
       <Stack.Screen name={'ThirdScreen'} component={ThirdScreen} />
+      <Stack.Screen name={'FourthScreen'} component={FourthScreen} />
     </Stack.Navigator>
   );
 };

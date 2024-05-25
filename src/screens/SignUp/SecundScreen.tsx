@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   SignUpContainer,
   ScreenLabel,
@@ -14,14 +14,32 @@ import { useNavigation } from "@react-navigation/native";
 
 const SecundScreen: React.FC = () => {
   const [cep, setCep] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [complement, setComplement] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [houseNumber, setHouseNumber] = useState('');
+  const [rua, setRua] = useState('');
 
   const navigation = useNavigation();
   const navigateToSignUp = () => {
     navigation.navigate('ThirdScreen');
   };
+
+  useEffect(() => {
+    if(cep.length === 8){
+      const getCepInformation = async () => {
+        let response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        response = await response.json();
+        setCity(response?.localidade);
+        setState(response?.uf);
+        setRua(response.logradouro);
+        setNeighborhood(response.bairro);
+      }
+
+      getCepInformation();
+    }
+  }, [cep]);
 
   return (
     <SignUpContainer>
@@ -35,15 +53,15 @@ const SecundScreen: React.FC = () => {
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <CustomInput
-                value={email}
-                onChangeText={setEmail}
+                value={state}
+                onChangeText={setState}
                 placeHolder={'Estado'}
                 blocked={true}
                 halfInput={true}
               />
               <CustomInput
-                value={password}
-                onChangeText={setPassword}
+                value={city}
+                onChangeText={setCity}
                 placeHolder={'Cidade'}
                 blocked={true}
                 halfInput={true}
@@ -52,22 +70,27 @@ const SecundScreen: React.FC = () => {
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <CustomInput
-                value={password}
-                onChangeText={setPassword}
+                value={neighborhood}
+                onChangeText={setNeighborhood}
                 placeHolder={'Bairro'}
                 halfInput={true}
               />
               <CustomInput
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
+                value={houseNumber}
+                onChangeText={setHouseNumber}
                 placeHolder={'N° da residência'}
                 halfInput={true}
               />
             </View>
           </HalfInputView>
           <CustomInput
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
+            value={rua}
+            onChangeText={setRua}
+            placeHolder={'Rua'}
+          />
+          <CustomInput
+            value={complement}
+            onChangeText={setComplement}
             placeHolder={'Complemento (opcional)'}
           />
         </InputsView>

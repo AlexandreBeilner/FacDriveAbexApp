@@ -13,12 +13,13 @@ import {useNavigation} from '@react-navigation/native';
 const ThirdScreen: React.FC = () => {
   const navigation = useNavigation();
   const navigateToSignUp = () => {
-    navigation.navigate('SecundScreen');
+    navigation.navigate('FourthScreen');
   };
 
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [age, setAge] = useState('');
-  const [CPF, setCPF] = useState('');
   return (
     <SignUpContainer>
       <ScrollViewContainer
@@ -27,25 +28,25 @@ const ThirdScreen: React.FC = () => {
         <ScreenLabel>Informe seus dados{'\n'}pessoais</ScreenLabel>
         <InputsView>
           <CustomInput
-            value={email}
-            onChangeText={setEmail}
+            value={name}
+            onChangeText={setName}
             placeHolder={'Nome completo'}
-          />
-          <CustomInput
-            value={email}
-            onChangeText={setEmail}
-            placeHolder={'Idade'}
-            keyboardType={'numeric'}
           />
           <CustomInput
             value={age}
             onChangeText={setAge}
+            placeHolder={'Idade'}
+            keyboardType={'numeric'}
+          />
+          <CustomInput
+            value={cpf}
+            onChangeText={setCpf}
             placeHolder={'CPF'}
             keyboardType={'numeric'}
           />
           <CustomInput
-            value={CPF}
-            onChangeText={setCPF}
+            value={birthDate}
+            onChangeText={setBirthDate}
             placeHolder={'Data de nascimento'}
             keyboardType={'numeric'}
           />

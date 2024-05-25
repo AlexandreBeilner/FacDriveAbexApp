@@ -33,10 +33,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
   }));
 
   useEffect(() => {
-    if (value && placeHolderOpacity.value === 0) {
-      placeHolderOpacity.value = withTiming(1, {duration: 200});
-    } else if (!value) {
-      placeHolderOpacity.value = withTiming(0, {duration: 100});
+    if(!blocked){
+      if (value && placeHolderOpacity.value === 0) {
+        placeHolderOpacity.value = withTiming(1, {duration: 200});
+      } else if (!value) {
+        placeHolderOpacity.value = withTiming(0, {duration: 100});
+      }
     }
   }, [value]);
 
